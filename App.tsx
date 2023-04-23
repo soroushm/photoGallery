@@ -27,7 +27,7 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-const Section: React.FC<
+export const Section: React.FC<
   PropsWithChildren<{
     title: string;
   }>
