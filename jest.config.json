@@ -1,6 +1,9 @@
 {
   "preset": "react-native",
-  "setupFilesAfterEnv": ["@testing-library/jest-native/extend-expect"],
+  "setupFilesAfterEnv": [
+    "@testing-library/jest-native/extend-expect",
+    "<rootDir>/setup/jest.setupAfterEnv.js"
+  ],
   "setupFiles": ["<rootDir>/setup/jest.setup.js"],
   "moduleNameMapper": {
     "\\.(gif|ttf|eot|svg|png)$": "<rootDir>/__mocks__/fileMock.js"
