@@ -4,6 +4,9 @@ import {server} from '../src/service/msw/server';
 beforeAll(() => server.listen({onUnhandledRequest: 'error'}));
 // Reset any request handlers that we may add during the tests,
 // so they don't affect other tests.
-afterEach(() => server.resetHandlers());
+afterEach(() => {
+  server.resetHandlers();
+  jest.restoreAllMocks();
+});
 // Clean up after the tests are finished.
 afterAll(() => server.close());
