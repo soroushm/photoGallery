@@ -9,7 +9,7 @@ const headers = {
 };
 
 const errorHandler = error => {
-  logEvent('\x1B[33m axios HTTP error', error);
+  logEvent('\x1B[33m Axios HTTP error', error);
   const code = getErrorCode(error);
   const errorObject = {
     code,
@@ -29,10 +29,10 @@ const options = {
 const request = axios.create(options);
 
 request.interceptors.request.use(
-  req => logEvent('axios HTTP request', req) || req,
+  req => logEvent('Axios HTTP request', req) || req,
 );
 request.interceptors.response.use(
-  res => logEvent('\x1B[32maxios HTTP response', res) || res,
+  res => logEvent('\x1B[32mAxios HTTP response', res) || res,
   errorHandler,
 );
 

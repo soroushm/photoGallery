@@ -1,6 +1,6 @@
 import React from 'react';
 import {Dimensions, StyleSheet} from 'react-native';
-import {Gallary} from './components/Gallary';
+import {Gallery} from './components/Gallery';
 import {Bootstrap, Provider} from './common';
 import {SafeArea} from './theme';
 
@@ -8,7 +8,7 @@ const App = () => (
   <Provider>
     <SafeArea style={styles.container}>
       <Bootstrap>
-        <Gallary />
+        <Gallery />
       </Bootstrap>
     </SafeArea>
   </Provider>

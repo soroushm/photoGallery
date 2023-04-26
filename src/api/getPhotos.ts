@@ -9,9 +9,9 @@ interface Param {
 }
 export const getPhotos = async ({
   pageParam = 0,
-  limit = 1,
+  limit = 100,
 }: Param): Promise<Response> => {
-  const {data} = await request.get('api/photos', {
+  const {data} = await request.get('/photos', {
     params: {
       _page: pageParam,
       _limit: limit,
