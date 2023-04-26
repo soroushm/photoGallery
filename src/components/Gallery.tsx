@@ -8,8 +8,9 @@ type GalleryProps = Omit<
   PhotoListProps<Photo>,
   'data' | 'renderItem' | 'keyExtractor'
 >;
+
 export const Gallery: FC<GalleryProps> = props => {
-  const {data} = usePhotosQuery();
+  const {data, fetchNextPage, isFetching, refetch} = usePhotosQuery();
   const images = data?.pages || [];
   const renderItem = useCallback(({item}: ListRenderItemInfo<Photo>) => {
     return <Image source={{uri: item.thumbnailUrl}} />;
@@ -26,6 +27,10 @@ export const Gallery: FC<GalleryProps> = props => {
         data={images}
         renderItem={renderItem}
         keyExtractor={extractKey}
+        onEndReachedThreshold={0.1}
+        onRefresh={() => refetch()}
+        onEndReached={() => fetchNextPage()}
+        refreshing={isFetching}
       />
     </Card>
   );
