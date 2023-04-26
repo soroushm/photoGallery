@@ -1,6 +1,6 @@
 import {rest} from 'msw';
 
-const mockPhoto = [
+export const mockPhoto = [
   {
     albumId: 1,
     id: 21,
@@ -9,6 +9,7 @@ const mockPhoto = [
     thumbnailUrl: 'https://via.placeholder.com/150/5e12c6',
   },
 ];
+export const mockPhotos = [mockPhoto];
 export const photos = rest.get(`*/photos`, async (req, res, ctx) =>
-  res(ctx.delay(20), ctx.json(mockPhoto)),
+  res(ctx.delay(20), ctx.json(mockPhotos)),
 );

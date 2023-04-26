@@ -1,20 +1,9 @@
 import React, {useCallback, FC, useState} from 'react';
 import {usePhotosQuery} from '../query/usePhotosQuery';
-import {
-  Card,
-  Image,
-  PhotoList,
-  PhotoListProps,
-  Modal,
-  Typography,
-} from '../theme';
-import {
-  ListRenderItemInfo,
-  TouchableOpacity,
-  Dimensions,
-  StyleSheet,
-} from 'react-native';
+import {Card, Image, PhotoList, PhotoListProps} from '../theme';
+import {ListRenderItemInfo, Pressable, StyleSheet} from 'react-native';
 import {Photo} from '../type';
+import {AlbumDetails} from './AlbumDetails';
 
 type GalleryProps = Omit<
   PhotoListProps<Photo>,
@@ -23,15 +12,15 @@ type GalleryProps = Omit<
 
 export const Gallery: FC<GalleryProps> = props => {
   const {data, fetchNextPage, isFetching, refetch} = usePhotosQuery();
-  const [modalData, setModalData] = useState<Photo | null>(null);
+  const [selectedAlbum, setSelectedAlbum] = useState<Photo | undefined>();
   const images = data?.pages || [];
   const renderItem = useCallback(({item}: ListRenderItemInfo<Photo>) => {
     return (
-      <TouchableOpacity
+      <Pressable
         style={styles.imageContainer}
-        onPress={() => setModalData(item)}>
+        onPress={() => setSelectedAlbum(item)}>
         <Image source={{uri: item.thumbnailUrl}} />
-      </TouchableOpacity>
+      </Pressable>
     );
   }, []);
 
@@ -39,7 +28,7 @@ export const Gallery: FC<GalleryProps> = props => {
     return item.id;
   }, []);
 
-  const onClose = () => setModalData(null);
+  const onClose = () => setSelectedAlbum();
 
   return (
     <Card flex={1} alignItems="stretch" justifyContent="center">
@@ -53,14 +42,11 @@ export const Gallery: FC<GalleryProps> = props => {
         onEndReached={() => fetchNextPage()}
         refreshing={isFetching}
       />
-      <Modal visible={!!modalData} onRequestClose={onClose}>
-        <Card height={Dimensions.get('window').width - 32} mb="md">
-          <Typography flex={1} pb="sm" fontWeight="bold">
-            {modalData?.title}
-          </Typography>
-          <Image source={{uri: modalData?.url}} />
-        </Card>
-      </Modal>
+      <AlbumDetails
+        visible={!!selectedAlbum}
+        onRequestClose={onClose}
+        album={selectedAlbum}
+      />
     </Card>
   );
 };

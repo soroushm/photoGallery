@@ -1,11 +1,16 @@
 import React, {FC} from 'react';
-import {Modal as DefaultModal, Pressable, ModalProps} from 'react-native';
+import {
+  Modal as DefaultModal,
+  Pressable,
+  ModalProps,
+  Dimensions,
+} from 'react-native';
 import {Card, Typography} from '../theme';
 
 export const Modal: FC<ModalProps> = ({onRequestClose, children, ...props}) => {
   return (
     <DefaultModal transparent animationType="slide" {...props}>
-      <Card {...styles.centeredView}>
+      <Card {...styles.container}>
         <Card {...styles.modalView}>
           <Card {...styles.header}>
             <Pressable onPress={onRequestClose}>
@@ -20,7 +25,7 @@ export const Modal: FC<ModalProps> = ({onRequestClose, children, ...props}) => {
 };
 
 const styles = {
-  centeredView: {
+  container: {
     flex: 1,
     justifyContent: 'flex-end',
     mt: 'md',
@@ -29,6 +34,7 @@ const styles = {
     borderRadius: 20,
     bg: 'paper',
     p: 'md',
+    maxHeight: Dimensions.get('window').height - 100,
   },
   header: {
     justifyContent: 'flex-end',

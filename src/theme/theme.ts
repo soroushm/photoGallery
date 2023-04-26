@@ -20,6 +20,7 @@ export const defaultTheme = {
     xl: spacing(4),
     xxl: spacing(5),
   },
+  borders: [0, '1px solid', '2px solid', '3px solid', '4px solid'],
   borderWidths: {
     sm: 1,
     md: 2,
@@ -53,10 +54,8 @@ export const darkTheme = {
     background: grey[900],
     textPrimary: grey[900],
     textSecondary: grey[500],
-  },
-  borders: {
-    light: grey[600],
-    primary: grey[800],
+    borderLight: grey[600],
+    borderPrimary: grey[800],
   },
 };
 
@@ -72,9 +71,7 @@ export const lightTheme = {
     background: grey[50],
     textPrimary: black,
     textSecondary: grey[800],
-  },
-  borders: {
-    light: bluegrey[200],
-    primary: bluegrey[500],
+    borderLight: bluegrey[200],
+    borderPrimary: bluegrey[500],
   },
 };

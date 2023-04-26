@@ -1,7 +1,7 @@
 import {Photo} from '../type';
 import request from './request';
 
-export type Response = Photo[];
+export type Photos = Photo[];
 
 interface Param {
   pageParam?: number;
@@ -10,7 +10,7 @@ interface Param {
 export const getPhotos = async ({
   pageParam = 0,
   limit = 100,
-}: Param): Promise<Response> => {
+}: Param): Promise<Photos> => {
   const {data} = await request.get('/photos', {
     params: {
       _page: pageParam,
