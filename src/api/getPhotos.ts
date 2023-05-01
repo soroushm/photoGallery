@@ -1,7 +1,6 @@
-import {Photo} from '../type';
+import {Albums} from '../type';
 import request from './request';
-
-export type Photos = Photo[];
+import {LIMIT} from '../config';
 
 interface Param {
   pageParam?: number;
@@ -9,12 +8,12 @@ interface Param {
 }
 export const getPhotos = async ({
   pageParam = 0,
-  limit = 100,
-}: Param): Promise<Photos> => {
-  const {data} = await request.get('/photos', {
+  limit = LIMIT,
+}: Param): Promise<Albums> => {
+  const {data} = await request.get('api/albums', {
     params: {
-      _page: pageParam,
-      _limit: limit,
+      page: pageParam,
+      limit: limit,
     },
   });
   return data;

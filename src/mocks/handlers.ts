@@ -1,3 +1,4 @@
-import {photos} from './photos';
+import {albumsHandler} from './albums';
+import {commentsHandler} from './comments';
 
-export const handlers = [photos];
+export const handlers = [albumsHandler, commentsHandler];

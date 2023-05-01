@@ -7,10 +7,10 @@ import {
   ListRenderItemInfo,
   ModalProps,
 } from 'react-native';
-import {Photo, Comment} from '../type';
+import {Album, Comment} from '../type';
 
 interface AlbumDetailsProps extends ModalProps {
-  album?: Photo;
+  album?: Album;
 }
 
 export const AlbumDetails: FC<AlbumDetailsProps> = ({

@@ -1,7 +1,7 @@
 import {getComments} from '../api/getComments';
 import {useInfiniteQuery} from '@tanstack/react-query';
 
-export const useCommentsQuery = (albumId?: number, enabled = true) => {
+export const useCommentsQuery = (albumId?: string, enabled = true) => {
   const key = ['comments', albumId];
   return useInfiniteQuery(
     key,

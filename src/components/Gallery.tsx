@@ -2,19 +2,19 @@ import React, {useCallback, FC, useState} from 'react';
 import {usePhotosQuery} from '../query/usePhotosQuery';
 import {Card, Image, PhotoList, PhotoListProps} from '../theme';
 import {ListRenderItemInfo, Pressable, StyleSheet} from 'react-native';
-import {Photo} from '../type';
+import {Album} from '../type';
 import {AlbumDetails} from './AlbumDetails';
 
 type GalleryProps = Omit<
-  PhotoListProps<Photo>,
+  PhotoListProps<Album>,
   'data' | 'renderItem' | 'keyExtractor'
 >;
 
 export const Gallery: FC<GalleryProps> = props => {
   const {data, fetchNextPage, isFetching, refetch} = usePhotosQuery();
-  const [selectedAlbum, setSelectedAlbum] = useState<Photo | undefined>();
+  const [selectedAlbum, setSelectedAlbum] = useState<Album | undefined>();
   const images = data?.pages || [];
-  const renderItem = useCallback(({item}: ListRenderItemInfo<Photo>) => {
+  const renderItem = useCallback(({item}: ListRenderItemInfo<Album>) => {
     return (
       <Pressable
         style={styles.imageContainer}
@@ -28,7 +28,7 @@ export const Gallery: FC<GalleryProps> = props => {
     return item.id;
   }, []);
 
-  const onClose = () => setSelectedAlbum();
+  const onClose = () => setSelectedAlbum(undefined);
 
   return (
     <Card flex={1} alignItems="stretch" justifyContent="center">
