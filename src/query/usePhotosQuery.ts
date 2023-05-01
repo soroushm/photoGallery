@@ -1,8 +1,8 @@
-import {getPhotos} from '../api/getPhotos';
+import {getAlbums} from '../api/getAlbums';
 import {useInfiniteQuery} from '@tanstack/react-query';
 export const usePhotosQuery = () => {
   const key = ['photos'];
-  return useInfiniteQuery(key, getPhotos, {
+  return useInfiniteQuery(key, getAlbums, {
     getNextPageParam: (lastPage, allPages) => {
       if (!lastPage?.length) {
         // We've reached the end of the list

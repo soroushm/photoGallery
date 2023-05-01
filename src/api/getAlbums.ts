@@ -6,8 +6,8 @@ interface Param {
   pageParam?: number;
   limit?: number;
 }
-export const getPhotos = async ({
-  pageParam = 0,
+export const getAlbums = async ({
+  pageParam = 1,
   limit = LIMIT,
 }: Param): Promise<Albums> => {
   const {data} = await request.get('api/albums', {

@@ -1,23 +1,21 @@
-import {Comment} from '../type';
+import {Comments} from '../type';
 import request from './request';
-
-export type Response = Comment[];
 
 interface Param {
   pageParam?: number;
   limit?: number;
-  albumId?: number;
+  albumId?: string;
 }
 export const getComments = async ({
   pageParam = 0,
   limit = 3,
   albumId,
-}: Param): Promise<Response> => {
-  const {data} = await request.get('/comments', {
+}: Param): Promise<Comments> => {
+  const {data} = await request.get('api/album/comments', {
     params: {
-      postId: albumId,
-      _page: pageParam,
-      _limit: limit,
+      albumId,
+      page: pageParam,
+      limit,
     },
   });
   return data;

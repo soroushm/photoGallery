@@ -6,7 +6,7 @@ import {wrapper} from '../utils/testUtitlity';
 describe('AlbumDetails', () => {
   const album = createMockAlbum();
 
-  it('renders album title', () => {
+  it('renders album title', async () => {
     const {getByText} = render(<AlbumDetails album={album} visible />, {
       wrapper,
     });

@@ -1,9 +1,9 @@
 import {renderHook} from '@testing-library/react-hooks';
 import {usePhotosQuery} from './usePhotosQuery';
-import {getPhotos} from '../api/getPhotos';
+import {getAlbums} from '../api/getAlbums';
 import {wrapper} from '../utils/testUtitlity';
 
-jest.mock('../api/getPhotos');
+jest.mock('../api/getAlbums');
 
 const MOCK_DATA = [
   {id: 1, title: 'Photo 1'},
@@ -11,7 +11,7 @@ const MOCK_DATA = [
 ];
 describe('usePhotosQuery', () => {
   test('fetches photos correctly', async () => {
-    getPhotos.mockResolvedValueOnce(MOCK_DATA);
+    getAlbums.mockResolvedValueOnce(MOCK_DATA);
 
     const {result, waitForNextUpdate} = renderHook(() => usePhotosQuery(), {
       wrapper,
@@ -23,6 +23,6 @@ describe('usePhotosQuery', () => {
     const {data} = result.current;
     expect(data.pages).toEqual(MOCK_DATA);
 
-    expect(getPhotos).toHaveBeenCalledTimes(1);
+    expect(getAlbums).toHaveBeenCalledTimes(1);
   });
 });
