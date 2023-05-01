@@ -1,5 +1,5 @@
 import React from 'react';
-import {ThemeProvider as StyledComponentsProvider} from 'styled-components';
+import {ThemeProvider as StyledComponentsProvider} from 'styled-components/native';
 import {darkTheme, lightTheme} from './theme';
 import {useColorScheme} from 'react-native';
 
