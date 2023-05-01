@@ -19,7 +19,6 @@ describe('create fake Comments', () => {
     expect(comment).toHaveProperty('id');
     expect(comment).toHaveProperty('userId');
     expect(comment).toHaveProperty('body');
-    expect(comment).toHaveProperty('email');
     expect(comment).toHaveProperty('name');
     expect(comment).toHaveProperty('date');
   });

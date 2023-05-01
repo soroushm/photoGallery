@@ -5,11 +5,10 @@ import {faker} from '@faker-js/faker';
 
 export const db = factory({
   comments: {
-    id: primaryKey(String),
+    id: primaryKey(faker.datatype.uuid),
     albumId: String,
     userId: String,
     name: String,
-    email: String,
     body: String,
     date: String,
   },
@@ -20,7 +19,6 @@ export const createMockAlbumComments = albumId => ({
   albumId,
   userId: faker.datatype.uuid(),
   name: faker.name.fullName(),
-  email: faker.internet.email(),
   body: faker.lorem.words(6),
   date: faker.date.past(),
 });
@@ -69,7 +67,7 @@ export const commentsHandler = [
   ...db.comments.toHandlers('rest', '*/api'), // rest-full api for comment
   rest.get(`*/api/album/comments`, async (req, res, ctx) => {
     const limit = Number(req.url.searchParams.get('limit') || LIMIT);
-    const page = Number(req.url.searchParams.get('page') || 1);
+    const page = Number(req.url.searchParams.get('page') || 0);
     const albumId = req.url.searchParams.get('albumId') ?? undefined;
     const totalCount = getTotalComments(albumId);
     const comments =

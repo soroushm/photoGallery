@@ -6,7 +6,7 @@ import {themeGet} from '@styled-system/theme-get';
 import {Card} from '../theme';
 
 interface CommentInputProps {
-  onSubmit: (comment: string) => void;
+  onSubmit: (comment: string) => string;
 }
 
 const Input = styled.TextInput`

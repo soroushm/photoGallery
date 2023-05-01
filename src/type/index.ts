@@ -9,11 +9,12 @@ export interface Album {
 export type Albums = Album[];
 
 export interface Comment {
-  postId: string;
+  albumId: string;
   id: string;
+  userId: string;
   name: string;
-  email: string;
   body: string;
+  date: string;
 }
 
 export type Comments = Comment[];

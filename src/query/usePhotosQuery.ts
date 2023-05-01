@@ -9,7 +9,7 @@ export const usePhotosQuery = () => {
         return undefined;
       }
       // Return the next page number to fetch
-      return allPages.length + 1;
+      return allPages.length;
     },
     select: data => ({
       ...data,

@@ -10,7 +10,7 @@ import {
   Platform,
 } from 'react-native';
 import {Album, Comment} from '../type';
-import {CommentInput} from './CommentInput';
+import {CommentSend} from './CommentSend';
 
 interface AlbumDetailsProps extends ModalProps {
   album?: Album;
@@ -73,7 +73,7 @@ export const AlbumDetails: FC<AlbumDetailsProps> = ({
           refreshing={isFetching}
           ListHeaderComponent={renderHeaderComponent}
         />
-        <CommentInput onSubmit={console.log} />
+        <CommentSend albumId={album?.albumId} />
       </Modal>
     </KeyboardAvoidingView>
   );
