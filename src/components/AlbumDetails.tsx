@@ -50,7 +50,7 @@ export const AlbumDetails: FC<AlbumDetailsProps> = ({
   }, []);
 
   return (
-    <Modal visible={visible} {...props}>
+    <Modal visible={visible} {...props} testID="AlbumDetails">
       <Typography flex={1} pb="sm" fontWeight="bold">
         {album?.title}
       </Typography>

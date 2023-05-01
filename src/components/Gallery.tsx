@@ -19,7 +19,7 @@ export const Gallery: FC<GalleryProps> = props => {
       <Pressable
         style={styles.imageContainer}
         onPress={() => setSelectedAlbum(item)}>
-        <Image source={{uri: item.thumbnailUrl}} />
+        <Image source={{uri: item.thumbnailUrl}} testID={`image-${item.id}`} />
       </Pressable>
     );
   }, []);
