@@ -1,9 +1,9 @@
 import React from 'react';
 import {CommentInput} from './CommentInput';
 import {
-  useCommentMutation,
+  usePostCommentMutation,
   UseCommentMutationProps,
-} from '../query/useCommentMutation';
+} from '../query/usePostCommentMutation';
 
 interface CommentSendProps {
   albumId?: string;
@@ -11,6 +11,6 @@ interface CommentSendProps {
 }
 
 export const CommentSend: React.FC<CommentSendProps> = ({albumId, options}) => {
-  const {mutate} = useCommentMutation({albumId, ...options});
+  const {mutate} = usePostCommentMutation({albumId, ...options});
   return <CommentInput onSubmit={comment => mutate(comment)} />;
 };

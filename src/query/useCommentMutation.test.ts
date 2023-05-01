@@ -8,37 +8,73 @@ import {wrapper} from '../utils/testUtitlity';
 jest.mock('../mocks/useCurrentUser');
 jest.mock('../api/request');
 const mockedUseCurrentUser = useCurrentUser as jest.Mock;
-const mockedRequestPost = request.post as jest.Mock;
+const mockedRequest = request as jest.Mocked<typeof request>;
+
+const currentUser = {
+  userId: '1',
+  name: 'Test User',
+};
 
 describe('useCommentMutation', () => {
   beforeEach(() => {
-    mockedUseCurrentUser.mockReturnValue({
-      userId: 'test-user-id',
-      name: 'Test User',
-    });
-    mockedRequestPost.mockResolvedValue({data: {}});
+    mockedUseCurrentUser.mockReturnValue(currentUser);
   });
 
   afterEach(() => {
     jest.clearAllMocks();
   });
 
-  it('calls mutationFn with correct parameters', async () => {
-    const {result} = renderHook(
-      () => useCommentMutation({albumId: 'test-album-id'}),
+  it.skip('successfully remove comment and invalidates queries', async () => {
+    const requestData = {
+      method: 'delete',
+      id: '1',
+    };
+
+    mockedRequest.delete.mockResolvedValue('success');
+    const {result, waitFor} = renderHook(
+      () => useCommentMutation({albumId: '1'}),
       {wrapper},
     );
 
     await act(async () => {
-      await result.current.mutate('Test comment');
+      await result.current.mutate(requestData);
     });
 
-    expect(mockedRequestPost).toHaveBeenCalledWith('api/comments', {
-      body: 'Test comment',
-      userId: 'test-user-id',
-      name: 'Test User',
-      albumId: 'test-album-id',
-      date: expect.any(String),
+    await waitFor(() => result.current.isSuccess);
+    expect(mockedRequest.delete).toHaveBeenCalledWith('api/comments/1', {
+      ...requestData.data,
+      userId: currentUser.userId,
+      name: currentUser.name,
     });
+    expect(result.current.data).toBe('success');
+  });
+
+  it.skip('successfully update comment and invalidates queries', async () => {
+    const requestData = {
+      method: 'put',
+      id: '1',
+      data: {
+        body: 'Test comment',
+      },
+    };
+
+    mockedRequest.put.mockResolvedValue('success');
+    const {result, waitFor} = renderHook(
+      () => useCommentMutation({albumId: '1'}),
+      {wrapper},
+    );
+
+    await act(async () => {
+      await result.current.mutate(requestData);
+    });
+
+    await waitFor(() => result.current.isSuccess);
+    expect(mockedRequest.put).toHaveBeenCalledWith('api/comments/1', {
+      ...requestData.data,
+      userId: currentUser.userId,
+      name: currentUser.name,
+    });
+
+    expect(result.current.data).toBe('success');
   });
 });

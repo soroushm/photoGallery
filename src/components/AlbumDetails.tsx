@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import {Album, Comment} from '../type';
 import {CommentSend} from './CommentSend';
+import {CommentRow} from './CommentRow';
 
 interface AlbumDetailsProps extends ModalProps {
   album?: Album;
@@ -27,14 +28,7 @@ export const AlbumDetails: FC<AlbumDetailsProps> = ({
   );
   const comments = data?.pages || [];
   const renderItem = useCallback(
-    ({item}: ListRenderItemInfo<Comment>) => (
-      <Card borderBottomWidth="sm" borderColor="borderLight" py="sm">
-        <Typography fontSize="sm" fontWeight="bold">
-          {item.name}
-        </Typography>
-        <Typography fontSize="sm">{item.body}</Typography>
-      </Card>
-    ),
+    ({item}: ListRenderItemInfo<Comment>) => <CommentRow comment={item} />,
     [],
   );
 
