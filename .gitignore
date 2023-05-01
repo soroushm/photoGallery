@@ -24,7 +24,6 @@ ios/.xcode.env.local
 
 # Android/IntelliJ
 #
-build/
 .idea
 .gradle
 local.properties
@@ -74,3 +73,7 @@ lerna-debug.log*
 
 # cache
 .eslintcache
+
+
+# Jest
+coverage/
