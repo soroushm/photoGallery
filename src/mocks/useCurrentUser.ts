@@ -1,12 +1,8 @@
 import {faker} from '@faker-js/faker';
-import {useMemo} from 'react';
 
+const FAKE_USER = {
+  userId: faker.datatype.uuid(),
+  name: faker.name.fullName(),
+};
 // @TODO mock #issueNumber
-export const useCurrentUser = () =>
-  useMemo(
-    () => ({
-      userId: faker.datatype.uuid(),
-      name: faker.name.fullName(),
-    }),
-    [],
-  );
+export const useCurrentUser = () => FAKE_USER;
