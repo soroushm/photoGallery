@@ -4,13 +4,17 @@ import {
   Pressable,
   ModalProps,
   Dimensions,
+  KeyboardAvoidingView,
+  Platform,
 } from 'react-native';
 import {Card, Typography} from '../theme';
 
 export const Modal: FC<ModalProps> = ({onRequestClose, children, ...props}) => {
   return (
     <DefaultModal transparent animationType="slide" {...props}>
-      <Card {...styles.container}>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        {...styles.container}>
         <Card {...styles.modalView}>
           <Card {...styles.header}>
             <Pressable onPress={onRequestClose}>
@@ -19,7 +23,7 @@ export const Modal: FC<ModalProps> = ({onRequestClose, children, ...props}) => {
           </Card>
           {children}
         </Card>
-      </Card>
+      </KeyboardAvoidingView>
     </DefaultModal>
   );
 };
@@ -31,7 +35,7 @@ const styles = {
     mt: 'md',
   },
   modalView: {
-    borderRadius: 20,
+    borderTopEndRadius: 20,
     bg: 'paper',
     p: 'md',
     maxHeight: Dimensions.get('window').height - 100,

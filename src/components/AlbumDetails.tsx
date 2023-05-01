@@ -4,10 +4,13 @@ import {Card, Image, Modal, Typography} from '../theme';
 import {
   Dimensions,
   FlatList,
+  KeyboardAvoidingView,
   ListRenderItemInfo,
   ModalProps,
+  Platform,
 } from 'react-native';
 import {Album, Comment} from '../type';
+import {CommentInput} from './CommentInput';
 
 interface AlbumDetailsProps extends ModalProps {
   album?: Album;
@@ -26,7 +29,10 @@ export const AlbumDetails: FC<AlbumDetailsProps> = ({
   const renderItem = useCallback(
     ({item}: ListRenderItemInfo<Comment>) => (
       <Card borderBottomWidth="sm" borderColor="borderLight" py="sm">
-        <Typography>{item.body}</Typography>
+        <Typography fontSize="sm" fontWeight="bold">
+          {item.name}
+        </Typography>
+        <Typography fontSize="sm">{item.body}</Typography>
       </Card>
     ),
     [],
@@ -50,21 +56,25 @@ export const AlbumDetails: FC<AlbumDetailsProps> = ({
   }, []);
 
   return (
-    <Modal visible={visible} {...props} testID="AlbumDetails">
-      <Typography flex={1} pb="sm" fontWeight="bold">
-        {album?.title}
-      </Typography>
-      <FlatList
-        {...props}
-        data={comments}
-        renderItem={renderItem}
-        keyExtractor={extractKey}
-        onEndReachedThreshold={0.1}
-        onRefresh={() => refetch()}
-        onEndReached={() => fetchNextPage()}
-        refreshing={isFetching}
-        ListHeaderComponent={renderHeaderComponent}
-      />
-    </Modal>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+      <Modal visible={visible} {...props} testID="AlbumDetails">
+        <Typography flex={1} pb="sm" fontWeight="bold">
+          {album?.title}
+        </Typography>
+        <FlatList
+          {...props}
+          data={comments}
+          renderItem={renderItem}
+          keyExtractor={extractKey}
+          onEndReachedThreshold={0.1}
+          onRefresh={() => refetch()}
+          onEndReached={() => fetchNextPage()}
+          refreshing={isFetching}
+          ListHeaderComponent={renderHeaderComponent}
+        />
+        <CommentInput onSubmit={console.log} />
+      </Modal>
+    </KeyboardAvoidingView>
   );
 };
