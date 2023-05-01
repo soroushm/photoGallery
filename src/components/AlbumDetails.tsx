@@ -63,6 +63,7 @@ export const AlbumDetails: FC<AlbumDetailsProps> = ({
           {album?.title}
         </Typography>
         <FlatList
+          testID="commentList"
           {...props}
           data={comments}
           renderItem={renderItem}
