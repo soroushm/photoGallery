@@ -1,20 +1,49 @@
-# SoniQ Services recruitment task for Mobile Developers
+# React-native based App
 
-Hello!
+## Getting Started
 
-If you are here then you have reached the coding challenge for mobile developers at SoniQ Services! Below you will find a description about the coding challenge that we would like you to complete.
-The source code of the solution should be provided as a bunch of files or via github repo (recommended). Please include a small Readme.md file which explains how to build and start the application. Also note that code quality, performance and maintainability is very important for us.
+To get started with this project, simply run:
 
-Good luck to you and hope you will enjoy the process while solving this task!
+```bash
+yarn install
+yarn prepare
+yarn dev
+cd ios && pod install
+```
 
-# Create a photo gallery application
+## Available Scripts
+
+In the project directory, you can run:
+
+### `yarn start`
+
+Runs the app in the development mode.\
+
+The page will reload if you make edits.\
+You will also see any lint errors in the console.
+
+### `yarn ios`
+
+Runs the app in the iphone simulation mode.\
+
+### `yarn test`
+
+Launches the test runner in the interactive watch mode.\
+
+### `yarn prepare`
+
+setup recommit stage for running lint and test in order to make sure everything working fine
+
+## task
+
+### Create a photo gallery application
 
 The aim of this exercise is to create a photo gallery application using React Native (not Expo!). Gallery should contain at least 100 photos.
 You can use REST or GraphQL to get the data.
 
 You should take no more than 5-6 hours to complete this task.
 
-# Technical requirements
+### Technical requirements
 
 1. Mock the data and create API layer to retrieve the data.
 2. Organize the data flow using redux-toolkit.
